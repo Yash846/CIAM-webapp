@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+/* Add application styles & imports to this file! */
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+body{
+  background-color: #f2f4f8;
+  font-family: flex ui-sans-serif;
+}
+.auth-card{
+  background: #FBFBFB;  /* fallback for old browsers */
+  border-radius: 5px;
+  box-shadow: 10px 10px 20px #00000038;
+}
+label{
+  color: #000;
+  font-weight: 700;
+}
+.user-image{
+  height: 70px;
+}
+.auth-avatar{
+  text-align: center;
+  margin-top: -50px;
+}
+.auth{
+  margin-top: 35px;
+  border: none;
+  border-radius: 6px;
+}
+.btn-my{
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+.simple-keyboard {
+  max-width: 850px;
+}

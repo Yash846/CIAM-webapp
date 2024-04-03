@@ -1,0 +1,19 @@
+.text-right.forget-pass a{
+    font-size: 14px;
+    color: grey;
+    font-weight: 600;
+    text-decoration: none;
+}
+.sign-up{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #000;
+}
+.sign-up a{
+    color: #00aeef;
+    font-weight: 600;
+    text-decoration: none;
+}
+.error-msg {
+    font-size: 14px;
+}

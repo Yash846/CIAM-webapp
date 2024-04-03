@@ -1,0 +1,88 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: block;
+    align-items: center;
+    background-color: rgb(86, 156, 6);
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-repeat: repeat;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar span {
+    margin: 20px;
+  }
+
+  .toolbar img {
+    margin-right: 0;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <span style="float: left;">Atums Shopping App</span>
+
+  <div *ngIf="loggedInUser" class="auth-avatar" (click)="openDropdown()">
+    <img src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png" alt="user" class="user-profile-image">
+  </div>
+
+  <div *ngIf="dropdownActive==true" class="dropdown-class">
+      <ul class="list-group">
+        <li (click)="redirectToProfile()" class="list-group-item">Profile</li>
+        <!-- <li class="list-group-item">Delete Account</li> -->
+        <li (click)="logoutUser()" class="list-group-item">Logout</li>
+      </ul>
+  </div>
+  
+  <!-- <span *ngIf="loggedInUser" style="float: right;" (click)="logoutUser()"> Logout </span> -->
+</div>
+
+<div class="container-fluid">
+  <br />
+  <!-- <a [routerLink]="['/login']" class="btn btn-primary">Login</a> &nbsp;
+  <a [routerLink]="['/sign-up']" class="btn btn-primary">Sign Up</a> -->
+  <br />
+  <router-outlet></router-outlet>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+

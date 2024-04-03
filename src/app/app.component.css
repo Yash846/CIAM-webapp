@@ -1,0 +1,18 @@
+.user-profile-image {
+    height: 40px;
+    margin-top: 10px;
+    float: right;
+    padding-right: 10px;
+}
+
+.dropdown-class {
+    position: relative;
+    background: white;
+    width: 10%;
+    color: black;
+    float: right;
+    margin-right: -40px;
+    margin-top: 60px;
+    border-radius: 10px;
+    z-index: 1
+}

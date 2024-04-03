@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3" style="margin-top: 6%;">
+
+        <div class="card auth">
+            
+            <div class="card-body auth-card">
+                <div style="margin-left: 13%;">
+                    <img src="https://cloudidentity1234.ice.ibmcloud.com/template/v1.0/static/logo.svg?themeId=68eea2c6-f4af-4841-8fbe-c44de1392bf1" />
+                </div>
+                <!-- <div class="auth-avatar">
+                    <img src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png" alt="user" class="user-image">
+                </div> -->
+                <!-- <h4> Register </h4> -->
+                <form [formGroup]="emailForm">
+                    <div class="form-group">
+                        <h5 style="margin: auto; width: 58%; padding: 10px;"> Lets get you registered with us </h5>
+                        <label for="email">Email</label>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': emailSubmitted && gval['email']['errors'] }" placeholder="Email"/>
+                            </div>
+                            <div class="col-md-3">
+                                <button *ngIf="!emailVerified" (click)="onSendOTP()" class="btn btn-link">Send OTP</button>
+                            </div>
+                        </div>
+                            
+                        <div *ngIf="emailSubmitted && gval['email']['errors']" class="invalid-feedback">
+                            <div *ngIf="gval['email']['errors']['required']">Email is required</div>
+                            <div *ngIf="gval['email']['errors']['email']">Enter valid email address</div>
+                        </div>
+                    </div>
+                </form>
+                <form *ngIf="!emailVerified" [formGroup]="otpForm">
+                                            
+                    <div class="form-group" *ngIf="trxnId.length">
+                        <label for="emailOtp">Email OTP</label>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>{{correlation}} - </h5>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" formControlName="emailOtp" class="form-control" [ngClass]="{ 'is-invalid': otpSubmitted && ival['emailOtp']['errors'] }" placeholder="OTP"/>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="ival['emailOtp']['errors']" class="invalid-feedback">
+                            <div *ngIf="ival['emailOtp']['errors']['required']">Email OTP is required</div>
+                        </div>
+                        <button [disabled]='loading' class="btn btn-my" (click)="onVerifyOTP()" >
+                            Verify
+                        </button>
+                    </div>
+                </form>
+                <form  *ngIf="emailVerified" [formGroup]="registerForm">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval['firstName']['errors'] }" placeholder="First Name"/>
+                        <div *ngIf="submitted && fval['firstName']['errors']" class="invalid-feedback">
+                            <div *ngIf="fval['firstName']['errors']['required']">First Name is required</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval['password']['errors'] }" placeholder="Password"/>
+                        <div *ngIf="submitted && fval['password']['errors']" class="invalid-feedback">
+                            <div *ngIf="fval['password']['errors']['required']">Password is required</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button [disabled]='loading' class="btn btn-my" (click)="onSubmit()">
+                        <span *ngIf='loading' class="spinner-border spinner-border-sm mr-1"></span>
+                            Register
+                        </button>
+                    </div>
+
+                </form>
+                <button (click)='loginRedirect()' class="btn btn-link">Login to continue</button>
+            </div>
+        </div>
+    </div>
+</div>

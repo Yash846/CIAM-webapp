@@ -1,0 +1,46 @@
+table.my-table {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  
+  thead.my-table.headers tr th {
+    border: white solid 1px;
+    background-color: grey;
+    color: white;
+    height: 25px;
+  }
+  
+  tbody.my-table.body tr td {
+    border: grey solid 1px;
+    border-left: none;
+    height: 25px;
+  }z
+  
+  tbody.my-table.body tr td.last {
+    border-right: none;
+  }
+  
+  tbody.my-table.body tr.active {
+    background-color: gainsboro;
+    cursor: pointer;
+  }
+  
+  div.pag-space {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  button.pag-button {
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  select.size-page {
+    width: 100px;
+    text-align-last: center;
+    cursor: pointer;
+  }
