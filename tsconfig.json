@@ -18,22 +18,20 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "resolveJsonModule": true,
-    
+
     "allowSyntheticDefaultImports": true,
-    "paths" :{
+    "paths": {
       "crypto": ["node_modules/crypto-browserify"],
-      "stream": ["node_modules/stream-browserify"],
+      "stream": ["node_modules/stream-browserify"]
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "skipLibCheck": true
   }
 }

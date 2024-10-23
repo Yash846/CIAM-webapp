@@ -1,11 +1,11 @@
 {
-    "/api/*": {
-        "target": "",
-        "secure": false,
-        "pathRewrite": {
-            "^/api": ""
-        },
-        "changeOrigin": true,
-        "logLevel": "debug"
-    }
+  "/api/*": {
+    "target": "https://cloudidentity1234.ice.ibmcloud.com/",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
 }
