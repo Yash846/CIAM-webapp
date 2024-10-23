@@ -1,16 +1,32 @@
-# Stage 1: Build Angular app
-FROM node:18 as build-stage
+FROM node:18-alpine AS build-stage
+
+# Set the working directory
 WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
+
+# Install Angular CLI globally
 RUN npm install -g @angular/cli
+
+# Copy the rest of the application files
 COPY . .
+
+# Build the Angular application
 RUN ng build --configuration production 
 
-# Stage 2: Serve the app with Nginx
-FROM nginx:alpine
-COPY --from=build-stage /app/dist/tcs-angular-app /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+# Set up proxy working directory and install any dependencies for it
+WORKDIR /app/proxy
+RUN npm install
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+# Copy vars.sh and give it executable permission
+COPY vars.sh .
+RUN chmod +x vars.sh
+
+# Expose the port
+EXPOSE 8080
+# Start the proxy server
+CMD [ "./vars.sh" ]

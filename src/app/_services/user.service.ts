@@ -4,11 +4,10 @@ import axios from 'axios';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   async createUser(body: any, token: any) {
     const headers = {
@@ -25,7 +24,7 @@ export class UserService {
     } catch (error) {
       throw error;
     }
-  };
+  }
 
   async generateAccessToken() {
     const body = {
@@ -42,15 +41,15 @@ export class UserService {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
           },
-        },
+        }
       );
       return response.data;
     } catch (error: any) {
       throw error;
     }
-  };
+  }
 
-  async loginUser(email: any, password: any){
+  async loginUser(email: any, password: any) {
     const body: any = {
       grant_type: 'password',
       password: password,
@@ -62,13 +61,13 @@ export class UserService {
     try {
       const response = await axios.post(
         `/api/oauth2/token`,
-        new URLSearchParams(body).toString(),
+        new URLSearchParams(body).toString()
       );
       return response;
     } catch (error) {
       throw error;
     }
-  };
+  }
 
   async getUserData(token: any) {
     const headers = {
@@ -83,7 +82,7 @@ export class UserService {
     } catch (error) {
       return error;
     }
-  };
+  }
 
   async updateUserData(token: any, body: any) {
     const headers = {
@@ -98,8 +97,7 @@ export class UserService {
     } catch (error) {
       throw error;
     }
-  };
-  
+  }
 
   async generateEmailOTP(token: any, body: any) {
     const headers = {
@@ -112,14 +110,14 @@ export class UserService {
         body,
         {
           headers: headers,
-        },
+        }
       );
       return response;
     } catch (error) {
       throw error;
     }
-  };
-  
+  }
+
   // Verify email otp
   async verifyEmailOTP(trxnId: any, token: any, body: any) {
     try {
@@ -134,23 +132,22 @@ export class UserService {
         body,
         {
           headers: header,
-        },
+        }
       );
       return response;
     } catch (error) {
       throw error;
     }
-  };
+  }
 
-
-  async getAccessToken(token: any){
+  async getAccessToken(token: any) {
     const headers = {
       'content-Type': 'application/x-www-form-urlencoded',
     };
     const body = {
       grant_type: 'authorization_code',
       code: token,
-      redirect_uri: environment.redirectUri,
+      redirect_uri: environment.CE_URL,
       client_id: environment.clientId,
       client_secret: environment.clientSecret,
       scope: environment.scope,
@@ -163,10 +160,10 @@ export class UserService {
     } catch (error) {
       throw error;
     }
-  };
+  }
 
   // Generate email otp
-  async generateSmsOTP(token: any, body: any){
+  async generateSmsOTP(token: any, body: any) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -177,15 +174,15 @@ export class UserService {
         body,
         {
           headers: headers,
-        },
+        }
       );
       return response;
     } catch (error) {
       throw error;
     }
-  };
+  }
 
-  async verifySmsOTP(trxnId: any, token: any, body: any){
+  async verifySmsOTP(trxnId: any, token: any, body: any) {
     try {
       const header = {
         'Content-Type': 'application/json',
@@ -198,35 +195,30 @@ export class UserService {
         body,
         {
           headers: header,
-        },
+        }
       );
       return response;
     } catch (error) {
       throw error;
     }
-  };
+  }
 
-  async deleteUser(token: any){
+  async deleteUser(token: any) {
     try {
       const header = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       };
-      const response = await axios.delete(
-        `/api/v2.0/Me`,
-        {
-          headers: header,
-        },
-      );
+      const response = await axios.delete(`/api/v2.0/Me`, {
+        headers: header,
+      });
       return response;
     } catch (error) {
       throw error;
     }
-  };
+  }
 
   getStats() {
     return this.http.get(`/user/stats`);
   }
- 
- 
 }

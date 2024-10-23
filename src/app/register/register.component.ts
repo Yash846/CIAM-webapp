@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
   }
 
   async loginRedirect() {
-    let redirectTo = `${environment.baseUrl}/oauth2/authorize?client_id=${environment.clientId}&client_secret=${environment.clientSecret}&response_type=code&redirect_uri=${environment.redirectUri}&scope=${environment.scope}`;
+    let redirectTo = `${environment.baseUrl}/oauth2/authorize?client_id=${environment.clientId}&client_secret=${environment.clientSecret}&response_type=code&redirect_uri=${environment.CE_URL}&scope=${environment.scope}`;
     console.log(redirectTo);
     window.open(redirectTo, '_self');
   }
