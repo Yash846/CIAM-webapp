@@ -1,7 +1,10 @@
 {
   "/api/*": {
-    "target": "http://localhost:3000/",
-    "secure": false,
+    "target": "https://cloudidentity1234.ice.ibmcloud.com/",
+    "secure": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
     "changeOrigin": true,
     "logLevel": "debug"
   }
