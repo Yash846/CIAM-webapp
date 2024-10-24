@@ -108,9 +108,10 @@ app.all("/api/*", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..dist/tcs-angular-app/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/tcs-angular-app/index.html"));
 });
 
 app.listen(port, () => {
+  console.log(path.join(__dirname, "../dist/tcs-angular-app/index.html"));
   console.log(`Proxy server running on port ${port}`);
 });

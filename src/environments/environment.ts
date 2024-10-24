@@ -6,6 +6,6 @@ export const environment = {
   apiClientId: '2513fc78-7504-411e-b3d0-80215e43bd37',
   clientSecret: '0gfGS39F7n',
   apiClientSecret: '7ACKnT6FQ0',
-  CE_URL: 'http://localhost:4200',
+  CE_URL: 'http://localhost:3000',
   scope: 'openid',
 };
