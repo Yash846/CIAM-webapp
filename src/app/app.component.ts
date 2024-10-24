@@ -5,31 +5,31 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'tcs-angular-app';
   loggedInUser = localStorage.getItem('login_token');
-  dropdownActive = false
+  dropdownActive = false;
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) {}
 
-  openDropdown(){
-    this.dropdownActive = !this.dropdownActive
+  openDropdown() {
+    this.dropdownActive = !this.dropdownActive;
   }
 
   logoutUser() {
-    this.dropdownActive = !this.dropdownActive
+    this.dropdownActive = !this.dropdownActive;
     localStorage.clear();
-    window.open(`${environment.baseUrl}/idaas/mtfim/sps/idaas/logout?themeId=68eea2c6-f4af-4841-8fbe-c44de1392bf1`, "_self")
+    window.open(
+      `${environment.baseUrl}/idaas/mtfim/sps/idaas/logout?themeId=d2ca09b4-06e6-457d-89cf-357f5553ee62`,
+      '_self'
+    );
     this.router.navigateByUrl('/');
   }
 
   redirectToProfile() {
-    this.dropdownActive = !this.dropdownActive
-    this.router.navigateByUrl('/profile')
+    this.dropdownActive = !this.dropdownActive;
+    this.router.navigateByUrl('/profile');
   }
-
 }
