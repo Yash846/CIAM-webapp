@@ -50,6 +50,7 @@ app.use(express.static(path.join(__dirname, "../dist/tcs-angular-app")));
 
 // Proxy endpoint
 app.all("/api/*", async (req, res) => {
+  let conf;
   try {
     const targetUrl = process.env.TARGET_API_URL + req.url.replace("/api", "");
 
@@ -82,6 +83,7 @@ app.all("/api/*", async (req, res) => {
       // httpsAgent: new https.Agent({ rejectUnauthorized: false })
     };
     console.log(config);
+    conf = config;
 
     const response = await axios(config);
 
@@ -96,6 +98,7 @@ app.all("/api/*", async (req, res) => {
     const errorResponse = {
       status: error.response?.status || 500,
       detail: error.message,
+      config: conf,
       schemas: ["urn:ietf:params:scim:api:messages:2.0:Error"],
     };
 
