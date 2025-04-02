@@ -1,0 +1,110 @@
+/* Center the main card container */
+.register-container {
+  margin-top: 4rem; /* Use rem units for better scalability */
+  margin-bottom: 4rem;
+}
+
+/* Center the logo */
+.logo-container {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Add space below the logo */
+}
+
+.logo-container img {
+  max-width: 250px; /* Limit logo size if needed */
+  height: auto;
+}
+
+/* Style the main heading */
+.registration-heading {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Space below heading */
+  font-size: 1.25rem; /* Adjust font size */
+  font-weight: 500;
+  color: #333;
+}
+
+/* Add consistent spacing for form groups */
+.form-group {
+  margin-bottom: 1.5rem; /* Increase bottom margin for better separation */
+}
+
+/* Ensure labels have consistent bottom margin */
+label {
+  margin-bottom: 0.5rem;
+  display: block; /* Ensure label takes full width */
+}
+
+/* Style the email input row */
+.email-input-row {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.email-input-row .form-control {
+  flex-grow: 1; /* Allow input to take available space */
+}
+
+.email-input-row .btn-link {
+  margin-left: 1rem; /* Add space to the left of the button */
+  white-space: nowrap; /* Prevent button text wrapping */
+  padding: 0.375rem 0.75rem; /* Match input padding */
+}
+
+/* Style the OTP section */
+.otp-section .form-group {
+  margin-bottom: 1rem; /* Slightly reduce margin for OTP group */
+}
+
+.otp-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.otp-input-group .correlation-prefix {
+  margin-right: 0.5rem; /* Space between prefix and input */
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.otp-input-group .form-control {
+  max-width: 120px; /* Limit OTP input width */
+  margin-right: 1rem; /* Space between input and button */
+}
+
+/* Style the final register button */
+.register-button-group {
+  text-align: center; /* Center the register button */
+  margin-top: 1.5rem;
+}
+
+/* Style the login redirect link */
+.login-link {
+  display: block; /* Make it a block element */
+  text-align: center; /* Center the text */
+  margin-top: 1.5rem; /* Add space above the link */
+}
+
+/* Ensure invalid feedback is displayed correctly */
+.invalid-feedback {
+  display: block; /* Make sure feedback is visible */
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+/* Adjust button alignment if needed */
+.btn-my {
+  width: 100%; /* Make buttons full width for consistency */
+  max-width: 200px; /* Optional: Set a max-width */
+  margin: 0 auto; /* Center if max-width is set */
+  display: block; /* Ensure block display for centering */
+}
+
+.otp-section .btn-my {
+  width: auto; /* Allow OTP verify button to size naturally */
+  max-width: none;
+  margin: 0;
+  display: inline-block; /* Reset display */
+}

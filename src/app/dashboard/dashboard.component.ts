@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService // Inject ToastrService
+  ) {}
   userData: any;
   statsData: any;
   loading = false;
@@ -47,7 +52,9 @@ export class DashboardComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        error.error.errMessage ? alert(error.error.errMessage) : null;
+        error.error.errMessage
+          ? this.toastr.error(error.error.errMessage)
+          : null; // Use ToastrService for error
       }
     );
   }

@@ -1,46 +1,142 @@
+/* Dashboard header styling */
+.dashboard-header {
+  min-height: 300px; /* Reduced height */
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  color: #333; /* Darker text for better readability */
+  margin-bottom: 2rem;
+}
+
+.dashboard-header .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    87deg,
+    #3f51b5 0,
+    #5e72e4 100%
+  ); /* Match our theme color */
+  opacity: 0.8;
+}
+
+.dashboard-header .header-content {
+  position: relative; /* Ensure content is above the mask */
+  z-index: 1;
+  padding: 3rem 0;
+}
+
+.dashboard-header h1 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.dashboard-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  max-width: 80%;
+}
+
+/* Projects card styling */
+.projects-card {
+  margin-top: 1rem; /* Positive margin instead of negative */
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.projects-card .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1.25rem 1.5rem;
+}
+
+.projects-card .card-header h4 {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Table styling */
 table.my-table {
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-  }
-  
-  thead.my-table.headers tr th {
-    border: white solid 1px;
-    background-color: grey;
-    color: white;
-    height: 25px;
-  }
-  
-  tbody.my-table.body tr td {
-    border: grey solid 1px;
-    border-left: none;
-    height: 25px;
-  }z
-  
-  tbody.my-table.body tr td.last {
-    border-right: none;
-  }
-  
-  tbody.my-table.body tr.active {
-    background-color: gainsboro;
-    cursor: pointer;
-  }
-  
-  div.pag-space {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  button.pag-button {
-    width: 50px;
-    height: 20px;
-    cursor: pointer;
-  }
-  
-  select.size-page {
-    width: 100px;
-    text-align-last: center;
-    cursor: pointer;
-  }
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+thead.my-table.headers tr th {
+  border: none;
+  background-color: #f8f9fa; /* Lighter header background */
+  color: #333; /* Darker text for better contrast */
+  padding: 12px 15px; /* More padding for better spacing */
+  font-weight: 600;
+  text-align: left; /* Left-align headers for better readability */
+  border-bottom: 2px solid #e9ecef; /* Bottom border only */
+}
+
+tbody.my-table.body tr td {
+  border: none;
+  border-bottom: 1px solid #e9ecef; /* Only bottom borders for cleaner look */
+  padding: 12px 15px; /* Match header padding */
+  text-align: left; /* Left-align content */
+  color: #525f7f; /* Softer text color */
+}
+
+tbody.my-table.body tr:last-child td {
+  border-bottom: none; /* Remove border from last row */
+}
+
+tbody.my-table.body tr:hover {
+  background-color: #f8f9fa; /* Hover effect */
+  cursor: pointer;
+}
+
+tbody.my-table.body tr.active {
+  background-color: #f1f3f9; /* Slightly darker than hover */
+  cursor: pointer;
+}
+
+/* Pagination styling */
+div.pag-space {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end; /* Right-align pagination */
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+button.pag-button {
+  min-width: 40px;
+  height: 36px;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #3f51b5;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button.pag-button:hover {
+  background-color: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
+}
+
+select.size-page {
+  width: 100px;
+  height: 36px;
+  text-align-last: center;
+  cursor: pointer;
+  margin-left: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0 0.5rem;
+}

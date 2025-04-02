@@ -1,237 +1,449 @@
-
-<div class="header pb-8 pt-3 pt-lg-8 d-flex">
-    <!-- Mask -->
-    <span class="mask bg-gradient-danger opacity-8"></span>
-    <div class="col-md-4">
-        <div class="card auth">
-            <div class="card-body auth-card">
-                <ul class="list-group">
-                    <li (click)="updateTab(1)" [ngClass]="['list-group-item', activeTab == 1 ? 'list-group-item-secondary' : '' ]">Personal Info</li>
-                    <li (click)="updateTab(2)" [ngClass]="['list-group-item', activeTab == 2 ? 'list-group-item-secondary' : '']">Update EmailId</li>
-                    <li (click)="updateTab(3)" [ngClass]="['list-group-item', activeTab == 3 ? 'list-group-item-secondary' : '' ]">Update PhoneNo</li>
-                    <li (click)="updateTab(4)" [ngClass]="['list-group-item', activeTab == 4 ? 'list-group-item-secondary' : '' ]">Delete Account</li>
-                    <li (click)="updateTab(5)" [ngClass]="['list-group-item', activeTab == 5 ? 'list-group-item-secondary' : '' ]">Change Password</li>
-                  </ul>
-                  <a routerLink="/dashboard" style="float: right" class="btn btn-link">Back To Dashboard</a>
-            </div>
+<div class="container-fluid">
+  <div class="profile-container">
+    <!-- Sidebar Navigation -->
+    <div class="profile-sidebar">
+      <div class="card auth">
+        <div class="card-body auth-card">
+          <ul class="list-group profile-nav">
+            <li
+              (click)="updateTab(1)"
+              [ngClass]="['list-group-item', activeTab == 1 ? 'active' : '']"
+              aria-current="true"
+            >
+              <i class="fas fa-user mr-2"></i> Personal Info
+            </li>
+            <li
+              (click)="updateTab(2)"
+              [ngClass]="['list-group-item', activeTab == 2 ? 'active' : '']"
+            >
+              <i class="fas fa-envelope mr-2"></i> Update Email
+            </li>
+            <li
+              (click)="updateTab(3)"
+              [ngClass]="['list-group-item', activeTab == 3 ? 'active' : '']"
+            >
+              <i class="fas fa-phone mr-2"></i> Update Phone Number
+            </li>
+            <li
+              (click)="updateTab(5)"
+              [ngClass]="['list-group-item', activeTab == 5 ? 'active' : '']"
+            >
+              <i class="fas fa-lock mr-2"></i> Change Password
+            </li>
+            <li
+              (click)="updateTab(4)"
+              [ngClass]="['list-group-item', activeTab == 4 ? 'active' : '']"
+            >
+              <i class="fas fa-trash-alt mr-2"></i> Delete Account
+            </li>
+          </ul>
+          <a routerLink="/dashboard" class="btn btn-link back-link">
+            <i class="fas fa-arrow-left mr-1"></i> Back To Dashboard
+          </a>
         </div>
+      </div>
     </div>
-    <div class="col-md-8">
-        <div class="card auth">
-            <div class="card-body auth-card">
-                <div *ngIf="activeTab==1" class="row">
-                    <div class="col-lg-12 col-md-10">
-            
-                        <form [formGroup]="profileForm" (ngSubmit)="onFormSubmit()">
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="email">Username</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input [(ngModel)]="userData.userName" type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval['userName']['errors'] }" placeholder="Username"/>
-                                    <div *ngIf="submitted && fval['userName']['errors']" class="invalid-feedback">
-                                        <div class="error-msg" *ngIf="fval['userName']['errors']['required']">Username is required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="firstName">Firstname</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input [(ngModel)]="userData.name.givenName" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval['firstName']['errors'] }" placeholder="Firstname"/>
-                                    <div *ngIf="submitted && fval['firstName']['errors']" class="invalid-feedback">
-                                        <div class="error-msg" *ngIf="fval['firstName']['errors']['required']">Firstname is required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="middleName">Middlename</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input [(ngModel)]="userData.name.middleName" type="text" formControlName="middleName" class="form-control" placeholder="Middlename"/>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="lastName">Lastname</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.name.familyName" formControlName="lastName" class="form-control" placeholder="Lastname"/>
-                                </div>
-                            </div>
 
-                            <hr/>
+    <!-- Main Content Area -->
+    <div class="profile-content">
+      <div class="card auth">
+        <div class="card-body auth-card">
+          <!-- Personal Information Tab -->
+          <div *ngIf="activeTab == 1" class="profile-form">
+            <form
+              [formGroup]="profileForm"
+              (ngSubmit)="onFormSubmit()"
+              novalidate
+            >
+              <!-- Personal Information Section -->
+              <div class="form-section">
+                <h5 class="form-section-title">Personal Information</h5>
 
-                            <h6 for="address" class="ml-2 mt-4 mb-3 font-weight-bold">Work Address</h6>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="streetAddress">Street Address</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.addresses && userData.addresses[0].streetAddress" formControlName="streetAddress" class="form-control" placeholder="Street Address"/>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="locality">City</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.addresses && userData.addresses[0].locality" formControlName="locality" class="form-control" placeholder="City"/>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="region">State</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.addresses && userData.addresses[0].region" formControlName="region" class="form-control" placeholder="State"/>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="postalCode">Zip code</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.addresses && userData.addresses[0].postalCode" formControlName="postalCode" class="form-control" placeholder="Zip Code"/>
-                                </div>
-                            </div>
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="country">Country</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input type="text" [(ngModel)]="userData.addresses && userData.addresses[0].country" formControlName="country" class="form-control" placeholder="Country"/>
-                                </div>
-                            </div>
-             
-                
-                            <div class="form-group" style="margin-top: 10px;">
-                                <button [disabled]='loading' class="btn btn-my">
-                                    <span *ngIf='loading' class="spinner-border spinner-border-sm mr-1"></span>
-                                    Save
-                                </button>
-                            </div>
-                        </form>
+                <div class="form-group">
+                  <label for="userName" class="form-label">Username</label>
+                  <input
+                    id="userName"
+                    [(ngModel)]="userData.userName"
+                    type="text"
+                    formControlName="userName"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && fval['userName'].errors
+                    }"
+                    placeholder="Enter your username"
+                  />
+                  <div
+                    *ngIf="submitted && fval['userName'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="fval['userName'].errors['required']">
+                      Username is required
                     </div>
+                  </div>
                 </div>
 
-                <div *ngIf="activeTab==2" class="row">
-                    <div class="col-lg-12 col-md-10">
-            
-                        <form [formGroup]="userEmailForm">
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="email">User Email Id</h6>
-                                </div>
-                                <div class="row full-width">                                    
-                                    <input [(ngModel)]="userData.emails[0].value" type="text" formControlName="email" class="form-control" placeholder="Email Id"/>
-                                    <label class="mt-4" for="email">Please verify above email, you will able to update once it is verified. OTP will be sent to your emailId
-                                        <button *ngIf="emailStatus == 'unverified'" (click)="onSendOTP()" class="btn btn-link">
-                                            Send OTP
-                                        </button>
-                                    </label>
-            
-                                    <div *ngIf="correlation.length>0"  class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-1"> <h6 *ngIf="emailStatus == 'otpSent'">{{correlation}} -  </h6></div>
-                                            <div class="col-md-6"> <input *ngIf="emailStatus == 'otpSent'" type="text" formControlName="emailOtp" class="form-control" placeholder="Email Otp"/> </div>
-                                            <div class="col-md-2"> <button *ngIf="emailStatus == 'otpSent'" (click)="onVerifyOTP()" class="btn btn-link">
-                                                Verify OTP
-                                            </button> </div>
-                                       </div>
-                                    </div>
-                                </div>
-                            </div>
-             
-                
-                            <div class="form-group" style="margin-top: 10px;">
-                                <button  (click)="onEmailUpdate()" [disabled]="emailStatus !== 'emailVerified'" class="btn btn-my">
-                                    Save
-                                </button>
-                            </div>
-                        </form>
+                <div class="form-group">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    id="firstName"
+                    [(ngModel)]="userData.name.givenName"
+                    type="text"
+                    formControlName="firstName"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && fval['firstName'].errors
+                    }"
+                    placeholder="Enter your first name"
+                  />
+                  <div
+                    *ngIf="submitted && fval['firstName'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="fval['firstName'].errors['required']">
+                      First name is required
                     </div>
+                  </div>
                 </div>
 
-                <div *ngIf="activeTab==3" class="row">
-                    <div class="col-lg-12 col-md-10">        
-                        <form [formGroup]="userSmsForm" (ngSubmit)="onEmailUpdate()">
-                            <div class="row m-2 ml-4">
-                                <div class="row full-width">
-                                    <h6 for="phoneNo">User PhoneNo</h6>
-                                </div>
-                                <div class="row full-width">
-                                    <input [(ngModel)]="userData.phoneNumbers && userData.phoneNumbers[0].value" type="text" formControlName="phoneNo" class="form-control" placeholder="Phone Number"/>
-                                   
-                                    <label class="mt-4" for="phoneNo">Please verify above phone number, you will able to update once it is verified. OTP will be sent on sms
-                                        <button *ngIf="smsStatus == 'unverified'" (click)="onSendSmsOTP()" class="btn btn-link">
-                                            Send OTP
-                                        </button>
-                                    </label>
-            
-                                    <div *ngIf="smsCorrelation.length>0"  class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-1"> <h6 *ngIf="smsStatus == 'otpSent'">{{smsCorrelation}} -  </h6></div>
-                                            <div class="col-md-6"> <input *ngIf="smsStatus == 'otpSent'" type="text" formControlName="phoneOtp" class="form-control" placeholder="SMS Otp"/> </div>
-                                            <div class="col-md-2"> <button *ngIf="smsStatus == 'otpSent'" (click)="onVerifySmsOTP()" class="btn btn-link">
-                                                Verify OTP
-                                            </button> </div>
-                                       </div>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="form-group" style="margin-top: 10px;">
-                                <button (click)="onPhoneUpdate()" [disabled]="smsStatus !== 'smsVerified'" class="btn btn-my">
-                                    Save
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="form-group">
+                  <label for="middleName" class="form-label"
+                    >Middle Name (Optional)</label
+                  >
+                  <input
+                    id="middleName"
+                    [(ngModel)]="userData.name.middleName"
+                    type="text"
+                    formControlName="middleName"
+                    class="form-control"
+                    placeholder="Enter your middle name"
+                  />
                 </div>
 
-                <div *ngIf="activeTab==4" class="row">
-                    <div class="col-lg-12 col-md-10">        
-                        <div class="row m-2 ml-4">
-                            <div class="row full-width">
-                                <h5 for="phoneNo">Delete Account</h5>
-                            </div>
-                            <div class="row full-width">
-                                <label class="mt-4" for="phoneNo">Are you sure you want to delete this account?</label>
-                            </div>
-                        </div>
-        
-                        <div class="form-group" style="margin-top: 10px;">
-                            <button (click)="onDeleteAccount()" class="btn btn-my">
-                                Yes
-                            </button>
-                        </div>
-                    </div>
+                <div class="form-group">
+                  <label for="lastName" class="form-label"
+                    >Last Name (Optional)</label
+                  >
+                  <input
+                    id="lastName"
+                    type="text"
+                    [(ngModel)]="userData.name.familyName"
+                    formControlName="lastName"
+                    class="form-control"
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+
+              <!-- Work Address Section -->
+              <div class="form-section">
+                <h5 class="form-section-title">Work Address</h5>
+
+                <div class="form-group">
+                  <label for="streetAddress" class="form-label"
+                    >Street Address</label
+                  >
+                  <input
+                    id="streetAddress"
+                    type="text"
+                    [(ngModel)]="
+                      userData.addresses && userData.addresses[0].streetAddress
+                    "
+                    formControlName="streetAddress"
+                    class="form-control"
+                    placeholder="Enter street address"
+                  />
                 </div>
 
-                <div *ngIf="activeTab==5" class="row">
-                    <div class="col-lg-12 col-md-10">        
-                        <div class="row m-2 ml-4">
-                            <div class="row full-width">
-                                <h5 for="phoneNo">Change Password</h5>
-                            </div>
-                            <div class="row full-width">
-                                <label class="mt-4" for="phoneNo">Are you sure you want to change the password?</label>
-                            </div>
-                        </div>
-        
-                        <div class="form-group" style="margin-top: 10px;">
-                            <button (click)="changePasswordRedirect()" class="btn btn-my">
-                                Yes
-                            </button>
-                        </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="locality" class="form-label">City</label>
+                      <input
+                        id="locality"
+                        type="text"
+                        [(ngModel)]="
+                          userData.addresses && userData.addresses[0].locality
+                        "
+                        formControlName="locality"
+                        class="form-control"
+                        placeholder="Enter city"
+                      />
                     </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="region" class="form-label"
+                        >State/Province</label
+                      >
+                      <input
+                        id="region"
+                        type="text"
+                        [(ngModel)]="
+                          userData.addresses && userData.addresses[0].region
+                        "
+                        formControlName="region"
+                        class="form-control"
+                        placeholder="Enter state/province"
+                      />
+                    </div>
+                  </div>
                 </div>
 
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="postalCode" class="form-label"
+                        >Postal/Zip Code</label
+                      >
+                      <input
+                        id="postalCode"
+                        type="text"
+                        [(ngModel)]="
+                          userData.addresses && userData.addresses[0].postalCode
+                        "
+                        formControlName="postalCode"
+                        class="form-control"
+                        placeholder="Enter postal/zip code"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="form-label">Country</label>
+                      <input
+                        id="country"
+                        type="text"
+                        [(ngModel)]="
+                          userData.addresses && userData.addresses[0].country
+                        "
+                        formControlName="country"
+                        class="form-control"
+                        placeholder="Enter country"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save Button -->
+              <div class="action-buttons">
+                <button [disabled]="loading" type="submit" class="btn btn-my">
+                  <span
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm mr-1"
+                  ></span>
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Email Update Tab -->
+          <div *ngIf="activeTab == 2" class="profile-form">
+            <form [formGroup]="userEmailForm" novalidate>
+              <div class="form-section">
+                <h5 class="form-section-title">Update Email Address</h5>
+
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    id="email"
+                    [(ngModel)]="userData.emails[0].value"
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid':
+                        gval['email'].touched && gval['email'].errors
+                    }"
+                    placeholder="Enter your email address"
+                  />
+                  <div
+                    *ngIf="gval['email'].touched && gval['email'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="gval['email'].errors['required']">
+                      Email is required
+                    </div>
+                    <div *ngIf="gval['email'].errors['email']">
+                      Please enter a valid email address
+                    </div>
+                  </div>
+
+                  <small class="form-text text-muted mt-2">
+                    Please verify your email address. You will be able to update
+                    once it is verified.
+                    <button
+                      *ngIf="emailStatus == 'unverified'"
+                      (click)="onSendOTP()"
+                      class="btn btn-link p-0 ml-1"
+                      type="button"
+                    >
+                      Send OTP
+                    </button>
+                  </small>
+                </div>
+
+                <!-- OTP Verification Section -->
+                <div *ngIf="correlation.length > 0" class="otp-section">
+                  <div *ngIf="emailStatus == 'otpSent'">
+                    <label for="emailOtp" class="form-label"
+                      >Enter OTP sent to your email</label
+                    >
+                    <div class="otp-input-group">
+                      <span class="otp-prefix">{{ correlation }} - </span>
+                      <input
+                        id="emailOtp"
+                        type="text"
+                        formControlName="emailOtp"
+                        class="form-control otp-input"
+                        placeholder="Enter OTP"
+                      />
+                      <button
+                        (click)="onVerifyOTP()"
+                        class="btn btn-outline-primary"
+                        type="button"
+                      >
+                        Verify OTP
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save Button -->
+              <div class="action-buttons">
+                <button
+                  (click)="onEmailUpdate()"
+                  [disabled]="emailStatus !== 'emailVerified'"
+                  class="btn btn-my"
+                  type="button"
+                >
+                  Update Email
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Phone Update Tab -->
+          <div *ngIf="activeTab == 3" class="profile-form">
+            <form [formGroup]="userSmsForm" novalidate>
+              <div class="form-section">
+                <h5 class="form-section-title">Update Phone Number</h5>
+
+                <div class="form-group">
+                  <label for="phoneNo" class="form-label">Phone Number</label>
+                  <input
+                    id="phoneNo"
+                    [(ngModel)]="
+                      userData.phoneNumbers && userData.phoneNumbers[0].value
+                    "
+                    type="tel"
+                    formControlName="phoneNo"
+                    class="form-control"
+                    placeholder="Enter your phone number"
+                  />
+
+                  <small class="form-text text-muted mt-2">
+                    Please verify your phone number. You will be able to update
+                    once it is verified.
+                    <button
+                      *ngIf="smsStatus == 'unverified'"
+                      (click)="onSendSmsOTP()"
+                      class="btn btn-link p-0 ml-1"
+                      type="button"
+                    >
+                      Send OTP
+                    </button>
+                  </small>
+                </div>
+
+                <!-- OTP Verification Section -->
+                <div *ngIf="smsCorrelation.length > 0" class="otp-section">
+                  <div *ngIf="smsStatus == 'otpSent'">
+                    <label for="phoneOtp" class="form-label"
+                      >Enter OTP sent to your phone</label
+                    >
+                    <div class="otp-input-group">
+                      <span class="otp-prefix">{{ smsCorrelation }} - </span>
+                      <input
+                        id="phoneOtp"
+                        type="text"
+                        formControlName="phoneOtp"
+                        class="form-control otp-input"
+                        placeholder="Enter OTP"
+                      />
+                      <button
+                        (click)="onVerifySmsOTP()"
+                        class="btn btn-outline-primary"
+                        type="button"
+                      >
+                        Verify OTP
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save Button -->
+              <div class="action-buttons">
+                <button
+                  (click)="onPhoneUpdate()"
+                  [disabled]="smsStatus !== 'smsVerified'"
+                  class="btn btn-my"
+                  type="button"
+                >
+                  Update Phone
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Delete Account Tab -->
+          <div *ngIf="activeTab == 4" class="profile-form">
+            <div class="confirmation-section">
+              <h5>Delete Account</h5>
+              <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                Warning: This action cannot be undone. All your data will be
+                permanently deleted.
+              </div>
+              <p>Are you sure you want to delete your account?</p>
+
+              <div class="action-buttons">
+                <button (click)="onDeleteAccount()" class="btn btn-danger">
+                  Yes, Delete My Account
+                </button>
+                <button
+                  (click)="updateTab(1)"
+                  class="btn btn-outline-secondary mt-2"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
+          </div>
+
+          <!-- Change Password Tab -->
+          <div *ngIf="activeTab == 5" class="profile-form">
+            <div class="confirmation-section">
+              <h5>Change Password</h5>
+              <p>You will be redirected to the password change page.</p>
+
+              <div class="action-buttons">
+                <button (click)="changePasswordRedirect()" class="btn btn-my">
+                  Continue to Password Change
+                </button>
+                <button
+                  (click)="updateTab(1)"
+                  class="btn btn-outline-secondary mt-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-

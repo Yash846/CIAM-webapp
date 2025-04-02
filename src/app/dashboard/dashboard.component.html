@@ -1,42 +1,76 @@
+<!-- Dashboard Header -->
+<div class="dashboard-header d-flex align-items-center rounded-md">
+  <!-- Gradient Mask -->
+  <span class="mask" style="border-radius: 10px"></span>
 
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-size: cover; background-position: center top;">
-    <!-- Mask -->
-    <span class="mask bg-gradient-danger opacity-8"></span>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-12 col-md-10">
-          <h1 class="display-2 text-black">Hello {{userData.name.formatted}}</h1>
-          <p class="text-black mt-0 mb-5">This is your dashboard page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-        </div>
+  <!-- Header Content -->
+  <div class="container-fluid header-content">
+    <div class="row m-0 px-3">
+      <div class="col-lg-10 col-md-10">
+        <h1 class="text-xl">Hello {{ userData.name.formatted }}</h1>
+        <p class="mt-0 mb-4">
+          This is your dashboard page. You can see the progress you've made with
+          your work and manage your projects or assigned tasks.
+        </p>
       </div>
-
     </div>
   </div>
-
-  <div class="row" style="margin-top: -200px;">
-    <div class="col-md-8 col-sm-6">
-        <div class="card auth">
-            <div class="card-body auth-card">
-                <h4> Projects List </h4>
-                <table class="my-table">
-                    <thead class="my-table headers">
-                      <tr>
-                        <th *ngFor="let column of header">{{column.config}}</th>
-                      </tr>
-                    </thead>
-                    <tbody class="my-table body">
-                      <tr my-active *ngFor="let row of statsData; index as rowIndex">
-                        <!-- <td>{{row['_id']}}</td> -->
-                        <td>{{row['projectId']}}</td>
-                        <td>{{row['projectName']}}</td>
-                        <td>{{row['projectDescription']}}</td>
-                        <td>{{row['projectOwner']}}</td>
-                      </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 
+<!-- Main Content -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Projects List Card -->
+    <div class="col-lg-8 col-md-12">
+      <div class="card projects-card">
+        <div class="card-header">
+          <h4>Projects List</h4>
+        </div>
+        <div class="card-body p-0">
+          <!-- Remove padding for table -->
+          <div class="table-responsive">
+            <!-- Add responsive wrapper -->
+            <table class="my-table">
+              <thead class="my-table headers">
+                <tr>
+                  <th *ngFor="let column of header">{{ column.config }}</th>
+                </tr>
+              </thead>
+              <tbody class="my-table body">
+                <tr *ngFor="let row of statsData; index as rowIndex">
+                  <td>{{ row["projectId"] }}</td>
+                  <td>{{ row["projectName"] }}</td>
+                  <td>{{ row["projectDescription"] }}</td>
+                  <td>{{ row["projectOwner"] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Add pagination if needed -->
+        <!-- <div class="pag-space">
+          <button class="pag-button">Prev</button>
+          <button class="pag-button">Next</button>
+          <select class="size-page">
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Right Column - Could add summary cards, stats, etc. -->
+    <div class="col-lg-4 col-md-12">
+      <div class="card projects-card">
+        <div class="card-header">
+          <h4>Activity</h4>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">No recent activity to display.</p>
+          <!-- Could add activity feed, notifications, etc. -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

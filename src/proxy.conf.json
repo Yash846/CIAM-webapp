@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://cloudidentity1234.ice.ibmcloud.com/",
+    "target": "https://cloudidentity1234.ice.ibmcloud.com",
     "secure": true,
     "pathRewrite": {
       "^/api": ""

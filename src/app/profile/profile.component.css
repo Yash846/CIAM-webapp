@@ -1,3 +1,163 @@
-.full-width{
-    width: 100%;
+/* Profile page layout */
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Sidebar styling */
+.profile-sidebar {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.profile-content {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .profile-sidebar {
+    flex: 0 0 30%;
+    max-width: 30%;
+    margin-bottom: 0;
+  }
+
+  .profile-content {
+    flex: 0 0 70%;
+    max-width: 70%;
+    padding-left: 1.5rem;
+  }
+}
+
+/* Navigation menu styling */
+.profile-nav {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.profile-nav .list-group-item {
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-nav .list-group-item:first-child {
+  border-top: 0;
+}
+
+.profile-nav .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+.profile-nav .list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.profile-nav .list-group-item.active {
+  background-color: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
+}
+
+/* Back to dashboard link */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Form styling */
+.profile-form {
+  padding: 1.5rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+/* OTP verification styling */
+.otp-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.otp-input-group {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.otp-prefix {
+  margin-right: 0.5rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.otp-input {
+  flex: 1;
+  max-width: 150px;
+  margin-right: 1rem;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-items: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.action-buttons .btn {
+  min-width: 120px;
+}
+
+/* Utility classes */
+.full-width {
+  width: 100%;
+}
+
+/* Confirmation sections */
+.confirmation-section {
+  text-align: center;
+  padding: 2rem;
+}
+
+.confirmation-section h5 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.confirmation-section .btn {
+  margin-top: 1rem;
 }

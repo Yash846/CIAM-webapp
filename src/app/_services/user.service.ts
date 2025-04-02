@@ -33,9 +33,11 @@ export class UserService {
       client_id: environment.apiClientId,
       client_secret: environment.apiClientSecret,
     };
+    console.log(body);
     try {
       const response = await axios.post(
         `/api/oauth2/token`,
+        // 'https://cloudidentity1234.ice.ibmcloud.com/api/oauth2/token',
         new URLSearchParams(body).toString(),
         {
           headers: {
@@ -45,6 +47,7 @@ export class UserService {
       );
       return response.data;
     } catch (error: any) {
+      console.log(error);
       throw error;
     }
   }
@@ -107,6 +110,8 @@ export class UserService {
     try {
       const response = await axios.post(
         `/api/v2.0/factors/emailotp/transient/verifications`,
+        // `https://cloudidentity1234.ice.ibmcloud.com/v2.0/factors/emailotp/transient/verifications`,
+
         body,
         {
           headers: headers,
@@ -114,6 +119,7 @@ export class UserService {
       );
       return response;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
@@ -126,6 +132,7 @@ export class UserService {
         Authorization: `Bearer ${token}`,
       };
       const response = await axios.post(
+        // `https://cloudidentity1234.ice.ibmcloud.com/v2.0/factors/emailotp/transient/verifications` +
         `/api/v2.0/factors/emailotp/transient/verifications/` +
           trxnId +
           '?returnJwt=true',
@@ -136,6 +143,8 @@ export class UserService {
       );
       return response;
     } catch (error) {
+      console.log(error);
+
       throw error;
     }
   }

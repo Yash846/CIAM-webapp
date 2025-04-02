@@ -1,18 +1,92 @@
-.user-profile-image {
-    height: 40px;
-    margin-top: 10px;
-    float: right;
-    padding-right: 10px;
+/* Toolbar Styles */
+.toolbar {
+  position: fixed; /* Fixed positioning to keep it at the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Space out items */
+  padding: 0 16px; /* Add horizontal padding */
+  background-color: #3f51b5; /* Example: Use a more standard Material Design color */
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  z-index: 1000; /* Ensure toolbar is above other content */
 }
 
+.toolbar .app-title {
+  /* No specific styles needed if flex handles alignment */
+}
+
+.toolbar .user-actions {
+  display: flex;
+  align-items: center;
+  position: relative; /* Needed for absolute positioning of dropdown */
+}
+
+/* User Profile Image Styles */
+.user-profile-image {
+  height: 40px;
+  width: 40px; /* Ensure square dimensions */
+  object-fit: cover; /* Prevent image distortion */
+  border-radius: 50%; /* Make it circular */
+  cursor: pointer;
+  margin-left: 16px; /* Add space between title and user actions */
+  border: 2px solid white; /* Add border for better visibility */
+}
+
+/* Auth Avatar Styling */
+.auth-avatar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+/* Dropdown Styles */
 .dropdown-class {
-    position: relative;
-    background: white;
-    width: 10%;
-    color: black;
-    float: right;
-    margin-right: -40px;
-    margin-top: 60px;
-    border-radius: 10px;
-    z-index: 1
+  position: absolute; /* Position relative to user-actions */
+  top: 100%; /* Position below the toolbar */
+  right: 0; /* Align to the right */
+  background: white;
+  min-width: 150px; /* Use min-width instead of percentage */
+  color: black;
+  /* float: right; Removed */
+  /* margin-right: -40px; Removed */
+  margin-top: 8px; /* Add some space from the toolbar */
+  border-radius: 4px; /* Standard border radius */
+  z-index: 1000; /* Ensure it's above other content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  border: 1px solid #eee; /* Subtle border */
+}
+
+.dropdown-class .list-group-item {
+  cursor: pointer;
+  padding: 8px 16px; /* Adjust padding */
+}
+
+.dropdown-class .list-group-item:hover {
+  background-color: #f5f5f5; /* Add hover effect */
+}
+
+/* Styles for logos (if needed, currently commented out in HTML) */
+.toolbar img {
+  margin-right: 0;
+}
+
+.toolbar #twitter-logo {
+  height: 40px;
+  margin: 0 8px;
+}
+
+.toolbar #youtube-logo {
+  height: 40px;
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover,
+.toolbar #youtube-logo:hover {
+  opacity: 0.8;
 }

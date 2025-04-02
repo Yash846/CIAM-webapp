@@ -1,19 +1,70 @@
-.text-right.forget-pass a{
-    font-size: 14px;
-    color: grey;
-    font-weight: 600;
-    text-decoration: none;
+/* Center the main card container */
+.login-container {
+  margin-top: 4rem; /* Use rem units */
+  margin-bottom: 4rem;
 }
-.sign-up{
-    margin-top: 10px;
-    font-size: 14px;
-    color: #000;
+
+/* Inherit .auth-avatar styling from global styles.css */
+
+/* Add consistent spacing for form groups */
+.form-group {
+  margin-bottom: 1.5rem; /* Consistent spacing */
 }
-.sign-up a{
-    color: #00aeef;
-    font-weight: 600;
-    text-decoration: none;
+
+/* Ensure labels have consistent bottom margin */
+label {
+  margin-bottom: 0.5rem;
+  display: block;
 }
+
+/* Style the button and link group */
+.action-group {
+  margin-top: 2rem; /* Add space above the button/link */
+  text-align: center; /* Center items */
+}
+
+.action-group .btn-my {
+  width: 100%; /* Make login button full width */
+  max-width: 200px; /* Optional max-width */
+  margin-bottom: 1rem; /* Space below login button */
+}
+
+.action-group .btn-link {
+  display: block; /* Ensure link takes its own line */
+  margin-top: 0.5rem; /* Space above register link */
+}
+
+/* Keep existing styles if they are still relevant, otherwise remove */
+.text-right.forget-pass a {
+  font-size: 14px;
+  color: grey;
+  font-weight: 600;
+  text-decoration: none;
+}
+/* .sign-up styles might be obsolete if using .action-group .btn-link */
+/*
+.sign-up {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000;
+}
+.sign-up a {
+  color: #00aeef;
+  font-weight: 600;
+  text-decoration: none;
+}
+*/
 .error-msg {
-    font-size: 14px;
+  /* Keep this for specific error styling if needed */
+  font-size: 80%; /* Align with Bootstrap's invalid-feedback */
+  /* color: #dc3545; /* Color is handled by .invalid-feedback */
+}
+
+/* Ensure invalid feedback is displayed correctly */
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }

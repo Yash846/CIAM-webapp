@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService // Inject ToastrService
   ) {}
   registerForm!: FormGroup;
   emailForm!: FormGroup;
@@ -73,7 +75,9 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('access_token', response.access_token);
       return response.access_token;
     } catch (err) {
-      alert('sign up page acess token error');
+      this.toastr.error(
+        'Unexpected error. We encountered an issue processing your request. Please try again later.'
+      ); // Use ToastrService
     }
   }
 
@@ -118,14 +122,14 @@ export class RegisterComponent implements OnInit {
       let token = localStorage.getItem('access_token');
       const response = await this.userService.createUser(data, token);
       if (response.status === 201) {
-        alert('Registration Successfull.');
+        this.toastr.success('Registration Successful.'); // Use ToastrService
         localStorage.setItem('userName', response.data.userName);
         this.router.navigateByUrl('/');
       } else {
         throw Error;
       }
     } catch (error: any) {
-      alert(error.response.data.detail);
+      this.toastr.error(error.response.data.detail);
     }
   }
 
@@ -152,10 +156,12 @@ export class RegisterComponent implements OnInit {
       if (response.status === 201) {
         this.trxnId = response.data.id;
         this.correlation = response.data.correlation;
-        alert('OTP send to your email');
+        this.toastr.info('OTP sent to your email'); // Use ToastrService
       }
     } catch (error) {
-      alert('sign up page send otp error');
+      this.toastr.error(
+        'Unable to send OTP. Please try again in a few moments.'
+      ); // Use ToastrService
     }
   }
 
@@ -173,11 +179,13 @@ export class RegisterComponent implements OnInit {
         body
       );
       if (response.status === 200) {
-        alert('Email Verified Successfully');
+        this.toastr.success('Email Verified Successfully'); // Use ToastrService
         this.emailVerified = true;
       }
     } catch (error) {
-      alert('Error on verify OTP');
+      this.toastr.error(
+        'OTP verification failed. Ensure you entered the correct code and try again.'
+      ); // Use ToastrService
     }
   }
 }

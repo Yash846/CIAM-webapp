@@ -1,36 +1,117 @@
 /* You can add global styles to this file, and also import other style files */
-/* Add application styles & imports to this file! */
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-body{
-  background-color: #f2f4f8;
-  font-family: flex ui-sans-serif;
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"); /* Add a professional font */
+
+html,
+body {
+  height: 100%; /* Ensure body takes full height */
 }
-.auth-card{
-  background: #FBFBFB;  /* fallback for old browsers */
-  border-radius: 5px;
-  box-shadow: 10px 10px 20px #00000038;
+
+body {
+  background-color: #f4f7f6; /* Slightly softer background */
+  font-family: "Roboto", sans-serif; /* Use Roboto font */
+  color: #333; /* Default text color */
+  margin: 0; /* Remove default margin */
+  padding-top: 60px; /* Add padding matching toolbar height since toolbar is fixed */
 }
-label{
-  color: #000;
-  font-weight: 700;
+
+/* General Container Styling */
+.container,
+.container-fluid {
+  padding-top: 10px; /* Reduced top padding since we have body padding-top */
+  padding-bottom: 20px;
 }
-.user-image{
+
+/* Authentication Card Styling */
+.auth-card {
+  background: #ffffff; /* Clean white background */
+  border-radius: 8px; /* Slightly larger radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  padding: 30px; /* Add padding inside the card */
+  /* margin-top: 50px; Add margin above the card */
+  border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+/* Label Styling */
+label {
+  color: #555; /* Softer label color */
+  font-weight: 500; /* Medium weight */
+  margin-bottom: 0.5rem; /* Add space below labels */
+}
+
+/* Input Styling */
+.form-control {
+  border-radius: 4px; /* Consistent border radius */
+  border: 1px solid #ced4da;
+  padding: 0.75rem 1rem; /* Adjust padding */
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* User Image / Avatar Styling */
+.user-image {
+  /* General user image class */
   height: 70px;
+  width: 70px; /* Ensure aspect ratio */
+  object-fit: cover; /* Prevent distortion */
+  border-radius: 50%; /* Circular images */
 }
-.auth-avatar{
+
+.auth-avatar {
+  /* Specific styling for avatar placement in auth forms */
   text-align: center;
-  margin-top: -50px;
+  margin: auto;
+  /* margin-top: 10px; Adjust based on image size and desired overlap */
+  /* margin-bottom: 20px; Add space below avatar */
 }
-.auth{
+
+.auth-avatar .user-image {
+  /* Style for the image within the auth avatar container */
+  border: 3px solid white; /* Add border to lift it visually */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* General Auth Container */
+.auth {
+  /* This class seems generic, might need refinement based on usage */
   margin-top: 35px;
   border: none;
   border-radius: 6px;
 }
-.btn-my{
-  background-color: #000;
-  border-color: #000;
+
+/* Custom Button Styling */
+.btn-my {
+  background-color: #3f51b5; /* Match toolbar color */
+  border-color: #3f51b5;
+  color: #fff;
+  padding: 10px 20px; /* Add padding */
+  font-weight: 500;
+  border-radius: 4px; /* Consistent radius */
+  transition: background-color 0.2s ease; /* Add transition */
+}
+
+.btn-my:hover {
+  background-color: #303f9f; /* Darker shade on hover */
+  border-color: #303f9f;
   color: #fff;
 }
+
+/* Link Styling */
+a {
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #303f9f;
+  text-decoration: underline;
+}
+
+/* Keyboard Styling (if applicable) */
 .simple-keyboard {
   max-width: 850px;
+  margin: 20px auto; /* Center keyboard if used */
 }

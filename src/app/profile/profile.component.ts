@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService // Inject ToastrService
   ) {}
   userData: any;
   updateUserData: any;
@@ -39,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.userEmailForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]], // Added email validator
       emailOtp: [''],
     });
     this.userSmsForm = this.formBuilder.group({
@@ -64,6 +66,18 @@ export class ProfileComponent implements OnInit {
     );
     if ((response as any).status == 200) {
       this.userData = (response as any).data;
+      // Populate the profile form with fetched data
+      this.profileForm.patchValue({
+        firstName: this.userData.name?.givenName || '',
+        userName: this.userData.userName || '',
+        middleName: this.userData.name?.middleName || '',
+        lastName: this.userData.name?.familyName || '',
+        country: this.userData.addresses?.[0]?.country || '',
+        locality: this.userData.addresses?.[0]?.locality || '',
+        postalCode: this.userData.addresses?.[0]?.postalCode || '',
+        region: this.userData.addresses?.[0]?.region || '',
+        streetAddress: this.userData.addresses?.[0]?.streetAddress || '',
+      });
     } else if ((response as any).response.status === 401) {
       localStorage.removeItem('login_token');
       this.router.navigateByUrl('/');
@@ -129,10 +143,10 @@ export class ProfileComponent implements OnInit {
         body
       );
       if (response.status === 200) {
-        alert('Profile updated successfully');
+        this.toastr.success('Profile updated successfully'); // Use ToastrService
       }
     } catch (error: any) {
-      alert(error.response.data.detail);
+      this.toastr.error(error.response.data.detail); // Use ToastrService
     }
   }
 
@@ -141,6 +155,24 @@ export class ProfileComponent implements OnInit {
     if (this.userEmailForm.invalid) {
       return;
     }
+
+    // Determine if username needs to be updated along with email
+    const currentUsername = this.userData.userName;
+    const currentEmail =
+      this.userData.emails && this.userData.emails.length > 0
+        ? this.userData.emails[0].value
+        : null;
+    const newEmail = email;
+    let updatedUsername = currentUsername;
+
+    if (currentUsername && currentEmail && currentUsername === currentEmail) {
+      updatedUsername = newEmail;
+      this.profileForm.controls['userName'].setValue(updatedUsername); // Update form field as well - Use bracket notation
+      this.toastr.info(
+        'Username will be updated to match the new email address.'
+      ); // Optional: Inform user
+    }
+
     const body = {
       emails: [
         {
@@ -155,7 +187,7 @@ export class ProfileComponent implements OnInit {
       ],
       name: this.userData.name,
       active: true,
-      userName: this.userData.userName,
+      userName: updatedUsername, // Use the potentially updated username
       phoneNumbers: this.userData.phoneNumbers
         ? this.userData.phoneNumbers
         : [],
@@ -168,10 +200,10 @@ export class ProfileComponent implements OnInit {
         body
       );
       if (response.status === 200) {
-        alert('User email updated successfully');
+        this.toastr.success('User email updated successfully'); // Use ToastrService
       }
     } catch (error: any) {
-      alert(error.response.data.detail);
+      this.toastr.error(error.response.data.detail); // Use ToastrService
     }
   }
 
@@ -205,10 +237,10 @@ export class ProfileComponent implements OnInit {
         body
       );
       if (response.status === 200) {
-        alert('User phone number updated successfully');
+        this.toastr.success('User phone number updated successfully'); // Use ToastrService
       }
     } catch (error: any) {
-      alert(error.response.data.detail);
+      this.toastr.error(error.response.data.detail); // Use ToastrService
     }
   }
 
@@ -238,10 +270,16 @@ export class ProfileComponent implements OnInit {
       if (response.status === 201) {
         this.trxnId = response.data.id;
         this.correlation = response.data.correlation;
-        alert('OTP send to your email');
+        this.toastr.info(
+          // Use ToastrService
+          'OTP has been sent to your email. If you don’t see it, check your spam folder.'
+        );
       }
     } catch (error) {
-      alert('sign up page send otp error');
+      this.toastr.error(
+        // Use ToastrService
+        'We encountered an issue while sending the OTP. Please retry or contact support if the problem persists.'
+      );
     }
   }
 
@@ -260,10 +298,12 @@ export class ProfileComponent implements OnInit {
       );
       if (response.status === 200) {
         this.emailStatus = 'emailVerified';
-        alert('Email Verified Successfully');
+        this.toastr.success('Email Verified successfully'); // Use ToastrService
       }
     } catch (error) {
-      alert('Error on verify OTP');
+      this.toastr.error(
+        'OTP verification failed. Ensure you entered the correct code and try again.'
+      ); // Use ToastrService
     }
   }
 
@@ -289,10 +329,15 @@ export class ProfileComponent implements OnInit {
       if (response.status === 201) {
         this.smsTrxnId = response.data.id;
         this.smsCorrelation = response.data.correlation;
-        alert('OTP sms send to your phone');
+        this.toastr.info(
+          'OTP sent successfully! Please check your SMS to proceed.'
+        ); // Use ToastrService
       }
     } catch (error) {
-      alert('sign up page send otp error');
+      this.toastr.error(
+        // Use ToastrService
+        'We encountered an issue while sending the OTP. Please retry or contact support if the problem persists.'
+      );
     }
   }
 
@@ -311,10 +356,13 @@ export class ProfileComponent implements OnInit {
       );
       if (response.status === 200) {
         this.smsStatus = 'smsVerified';
-        alert('Phone number Verified Successfully');
+        this.toastr.success('Phone number verified successfully'); // Use ToastrService
       }
     } catch (error) {
-      alert('Error on verify OTP');
+      this.toastr.error(
+        // Use ToastrService
+        'OTP verification failed. Ensure you entered the correct code and try again.'
+      );
     }
   }
 
